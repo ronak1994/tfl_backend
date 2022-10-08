@@ -1,12 +1,12 @@
 require('dotenv').config({path:"./config.env"});
 const express = require('express');
 const cors = require('cors');
-//const connectDB = require('./config/db');
+const connectDB = require('./config/db');
 const errorHandler = require('./middleware/error');
 
 
 //db connections
-//connectDB();
+connectDB();
 
 const app = express();
 
@@ -19,9 +19,9 @@ app.use("/",(req,res)=>{
     })
 });
 
-/*app.use("/api/auth",require("./routes/auth"));
+app.use("/api/auth",require("./routes/auth"));
 app.use("/api/admin",require("./routes/admin"));
-app.use("/api/school",require("./routes/school"));*/
+app.use("/api/school",require("./routes/school"));
 
 
 //error handleer should be last piece of middleware check now?
