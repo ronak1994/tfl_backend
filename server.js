@@ -15,7 +15,7 @@ app.use(cors());
 
 app.use("/",(req,res)=>{
     res.json({
-        msg:"Hello from PPL Servers yo"
+        msg:"Hello from PPL Servers yo ab bata?"
     })
 });
 
