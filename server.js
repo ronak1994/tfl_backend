@@ -13,15 +13,11 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.use("/",(req,res)=>{
-    res.json({
-        msg:"Hello from PPL Servers yo ab bata?"
-    })
-});
 
 app.use("/api/auth",require("./routes/auth"));
 app.use("/api/admin",require("./routes/admin"));
 app.use("/api/school",require("./routes/school"));
+app.use("/api/teacher",require("./routes/teacher"));
 
 
 //error handleer should be last piece of middleware check now?

@@ -3,6 +3,7 @@ const Admin = require('../models/Admin');
 const ErrorResponse = require('../utils/errorResponse');
 
 exports.protect = async (req, res, next)=>{
+   // console.log(req.headers.authorization);
     if(req.headers.authorization && req.headers.authorization.startsWith("Bearer")){
         token = req.headers.authorization.split(" ")[1]
     }

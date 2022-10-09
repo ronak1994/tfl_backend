@@ -1,7 +1,6 @@
 const School = require('../models/School');
 
 exports.register = async (req,res,next) =>{
-  console.log(req.body);  
   let temp = {
     enabled:true,
     payment_status:'pending',
@@ -21,6 +20,7 @@ exports.register = async (req,res,next) =>{
 };
 
 exports.getList=async(req,res,next)=>{
+
     try {
         const schools = await School.find({})
         res.status(200).json(schools);
@@ -43,6 +43,47 @@ exports.getSchoolById=async(req,res,next)=>{
  exports.updateSchool=async(req,res,next)=>{
     try {
          const school = await School.updateOne({_id:req.body._id},{$set:req.body});
+         res.status(200).json(school);
+    
+     } catch (error) {
+         res.status(201).json(error);
+     }
+ }
+ 
+ exports.disableSchool=async(req,res,next)=>{
+    try {
+         const school = await School.updateOne({_id:req.body.id},{$set:{'enabled':false}});
+         res.status(200).json(school);
+    
+     } catch (error) {
+         res.status(201).json(error);
+     }
+ }
+ 
+ exports.enableSchool=async(req,res,next)=>{
+    try {
+         const school = await School.updateOne({_id:req.body.id},{$set:{'enabled':true}});
+         res.status(200).json(school);
+    
+     } catch (error) {
+         res.status(201).json(error);
+     }
+ }
+ 
+ exports.approveSchool=async(req,res,next)=>{
+    try {
+        const date = new Date().toLocaleDateString();
+         const school = await School.updateOne({_id:req.body.id},{$set:{'status':'approved','approval_date':date}});
+         res.status(200).json(school);
+    
+     } catch (error) {
+         res.status(201).json(error);
+     }
+ }
+ 
+ exports.disapproveSchool=async(req,res,next)=>{
+    try {
+         const school = await School.updateOne({_id:req.body.id},{$set:{'status':'pending','approval_date':''}});
          res.status(200).json(school);
     
      } catch (error) {
